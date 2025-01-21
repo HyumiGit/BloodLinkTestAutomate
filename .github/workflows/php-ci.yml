@@ -28,13 +28,6 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    # Step 4: Set up environment (if needed)
-    - name: Set up database
-      run: |
-        sudo apt-get install mysql-server
-        sudo mysql -e "CREATE DATABASE bloodlink_test;"
-        sudo mysql bloodlink_test < path/to/your/dump.sql
-
     # Step 5: Run PHPUnit tests
     - name: Run PHPUnit
       run: vendor/bin/phpunit tests/
