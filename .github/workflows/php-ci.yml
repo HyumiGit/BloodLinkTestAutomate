@@ -1,0 +1,40 @@
+name: PHP CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up PHP
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: mysqli
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    # Step 4: Set up environment (if needed)
+    - name: Set up database
+      run: |
+        sudo apt-get install mysql-server
+        sudo mysql -e "CREATE DATABASE bloodlink_test;"
+        sudo mysql bloodlink_test < path/to/your/dump.sql
+
+    # Step 5: Run PHPUnit tests
+    - name: Run PHPUnit
+      run: vendor/bin/phpunit tests/
