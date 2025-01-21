@@ -210,7 +210,7 @@ CREATE TABLE `user` (
   `userID` int(11) NOT NULL,
   `userEmail` varchar(100) NOT NULL,
   `userPwd` varchar(255) NOT NULL,
-  `registrationDate` date NOT NULL DEFAULT curdate()
+  `registrationDate` date NOT NULL DEFAULT (CURDATE())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
